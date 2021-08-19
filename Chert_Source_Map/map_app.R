@@ -25,17 +25,18 @@ icons <- awesomeIcons(
 
 #RMmap
 
-ui <- bootstrapPage(
-  sidebarLayout( position = "right",
-    sidebarPanel("sidebar panel", width = 2),
-    mainPanel(leafletOutput("map"),
+ui <- fillPage(
+ leafletOutput("map", width = "100%", height = "100%"),
+              tags$style(type = "text/css", "html, body {width:100%; height:100%}"),
               fluidRow(verbatimTextOutput("map_marker_click"))
-    )))
+    )
 
-
+  
 server <- function(input, output, session) {
   
   data <- read_csv("C:/Users/Meran/Documents/PhD/R projects/Chert_Sources_Map/Data/chert_field.csv")
+  
+  
   
   output$map <- renderLeaflet({
     leaflet() %>%
